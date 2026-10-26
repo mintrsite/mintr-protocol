@@ -1,0 +1,17 @@
+{
+  "name": "mintr",
+  "version": "1.0.0",
+  "description": "Mintr site",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "gates": "node scripts/gates.mjs",
+    "serve": "node scripts/serve.mjs",
+    "assets": "node scripts/analyze-assets.mjs"
+  },
+  "type": "module",
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  },
+  "private": true,
+  "license": "MIT"
+}

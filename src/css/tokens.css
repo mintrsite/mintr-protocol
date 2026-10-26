@@ -1,0 +1,51 @@
+/*
+  The only file in the project allowed to hold colour literals.
+  Palette provenance: k-means (k=8, strided sample of ~40k pixels) run over
+  brand/LOGO MINTR PNG.png (opaque art) and brand/LOGO MINTR PNG...png (cutout).
+  Each centroid is snapped to the nearest real pixel; the trailing "px" note is
+  that pixel's file and x,y in the 2000x2000 source. Gates re-read every one.
+*/
+:root {
+  --ink-0: #080602; /* px brand/LOGO MINTR PNG.png 1200,31 */
+  --ink-1: #1a1105; /* px brand/LOGO MINTR PNG.png 200,817 */
+  --ink-2: #331f06; /* px brand/LOGO MINTR PNG.png 900,379 */
+  --ink-3: #523008; /* px brand/LOGO MINTR PNG.png 400,1680 */
+  --umber: #7c4b0d; /* px brand/LOGO MINTR PNG.png 300,1386 */
+  --amber: #b77814; /* px brand/LOGO MINTR PNG.png 600,1585 */
+  --gold: #f3da38; /* px brand/LOGO MINTR PNG.png 1200,1065 */
+  --gold-hi: #fcd62a; /* px brand/LOGO MINTR PNG...png 1200,942 */
+  --cyan: #2ab5b3; /* px brand/LOGO MINTR PNG.png 1400,829 */
+  --cyan-hi: #5fe9cc; /* px brand/LOGO MINTR PNG...png 1200,586 */
+  --teal-deep: #036666; /* px brand/LOGO MINTR PNG...png 1400,806 */
+  --rust: #c05e01; /* px brand/LOGO MINTR PNG...png 1200,1006 */
+  --bone: #fafdfd; /* px brand/LOGO MINTR PNG.png 672,748 */
+
+  --bg: var(--ink-0);
+  --surface: color-mix(in srgb, var(--ink-1) 86%, var(--ink-0));
+  --surface-2: color-mix(in srgb, var(--ink-2) 70%, var(--ink-0));
+  --line: color-mix(in srgb, var(--amber) 26%, transparent);
+  --line-strong: color-mix(in srgb, var(--gold) 48%, transparent);
+  --text: var(--bone);
+  --text-dim: color-mix(in srgb, var(--bone) 66%, var(--ink-2));
+  --accent: var(--gold);
+  --up: var(--cyan-hi);
+  --down: var(--rust);
+  --glow: color-mix(in srgb, var(--gold) 22%, transparent);
+
+  --font-display: "Arial Black", "Segoe UI Black", Impact, system-ui, sans-serif;
+  --font-body: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+
+  --radius: 16px;
+  --radius-s: 10px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 180ms;
+  --t-mid: 420ms;
+  --t-slow: 720ms;
+  --gutter: 16px;
+  --wrap: 1180px;
+  --tap: 44px;
+}
+@media (min-width: 760px) {
+  :root { --gutter: 28px; }
+}

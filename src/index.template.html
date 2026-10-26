@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mintr | Read the ground before you swing</title>
+<meta name="description" content="Mintr is a Solana token with a live board of what the chain is trading right now. Real volume, real liquidity, no filler.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; connect-src 'self' https://api.dexscreener.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mintr">
+<meta property="og:description" content="A Solana token with a live market board.">
+<meta property="og:image" content="https://mintr.site/assets/og.jpg">
+<meta property="og:url" content="https://mintr.site/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/boot.js"></script>
+</head>
+<body data-boosts-url="{{BOOSTS_URL}}" data-pairs-url="{{PAIRS_URL}}">
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<div class="top">
+  <header class="bar wrap">
+    <a class="brand" href="#top" aria-label="Mintr, back to top">
+      <img src="assets/mark-160.png" width="{{MARK_W}}" height="{{MARK_H}}" alt="">
+      <span>Mintr</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#market">Board</a>
+      <a href="#why">Why Mintr</a>
+      <a href="#how">How it works</a>
+      <a href="#path">Roadmap</a>
+    </nav>
+    {{SOCIAL}}
+  </header>
+  {{CA_SLOT}}
+</div>
+
+<main id="top">
+  <section class="hero">
+    <canvas class="hero__mesh" aria-hidden="true"></canvas>
+    <div class="hero__grain" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero__grid">
+        <div data-depth="0.4">
+          <span class="pill rv" data-state="loading" id="pill" role="status"><i class="dot"></i><span class="pill__t">Syncing</span></span>
+          <h1 class="rv"><em>Read</em> the ground before you swing.</h1>
+          <p class="lead rv">Mintr lives on Solana and keeps one eye on the whole chain. The board below pulls what is moving right now, ranked by what people actually traded, so you can judge a vein before you commit a single swing.</p>
+          <div class="cta rv">
+            <a class="btn btn--solid" href="#market">Open the board</a>
+            <a class="btn btn--ghost" href="#how">How it works</a>
+          </div>
+        </div>
+        <div class="hero__art rv" data-depth="1">
+          <div class="hero__halo" aria-hidden="true"></div>
+          <img src="assets/mark-720.png" width="{{MARK_BIG_W}}" height="{{MARK_BIG_H}}" alt="Mintr emblem: a gold miner's helmet with a cyan gem, flanked by two crossed pickaxes" fetchpriority="high">
+        </div>
+      </div>
+      <div class="stats" id="stats">
+        <div class="tile rv" data-spot><div class="tile__k">Chain</div><div class="tile__v">{{CHAIN}}</div></div>
+        <div class="tile rv" data-spot><div class="tile__k">Tokens on board</div><div class="tile__v" data-stat="count"><span class="skel skel--l"></span></div></div>
+        <div class="tile rv" data-spot><div class="tile__k">Board volume</div><div class="tile__v" data-stat="vol"><span class="skel skel--l"></span></div></div>
+        <div class="tile rv" data-spot><div class="tile__k">Board liquidity</div><div class="tile__v" data-stat="liq"><span class="skel skel--l"></span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ticker" aria-label="Live price ticker">
+    <div class="ticker__view" id="ticker">
+      <div class="ticker__set">
+        <span class="tick"><span class="skel skel--l"></span></span><span class="tick"><span class="skel skel--l"></span></span><span class="tick"><span class="skel skel--l"></span></span><span class="tick"><span class="skel skel--l"></span></span><span class="tick"><span class="skel skel--l"></span></span><span class="tick"><span class="skel skel--l"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="market">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <div>
+          <div class="eyebrow">Live board</div>
+          <h2>Ten richest veins</h2>
+          <p class="sec__sub">Solana tokens ranked by traded volume over the last day. Refreshes by itself while this tab is in front.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Board order">
+          <button class="tab" role="tab" aria-selected="true" data-mode="volume">Volume</button>
+          <button class="tab" role="tab" aria-selected="false" data-mode="movers">Movers</button>
+          <button class="tab" role="tab" aria-selected="false" data-mode="liquidity">Depth</button>
+        </div>
+      </div>
+      <div class="board rv" role="table" aria-label="Top Solana tokens by volume">
+        <div class="row row--head" role="row">
+          <div role="columnheader">#</div><div role="columnheader">Token</div>
+          <div class="h-r" role="columnheader">Price</div><div class="h-r" role="columnheader">24h</div>
+          <div class="h-r" role="columnheader">Volume</div><div class="h-r" role="columnheader">Liquidity</div>
+          <div role="columnheader"><span class="sr-only">Copy</span></div>
+        </div>
+        <div id="rows" role="rowgroup">{{SKELETON_ROWS}}</div>
+      </div>
+      <noscript><p class="fine">The live board needs JavaScript.</p></noscript>
+      <p class="fine">Figures come straight from a public aggregator and can lag or disagree with other venues. Treat them as a compass, not advice.</p>
+    </div>
+  </section>
+
+  <div class="billboard" aria-hidden="true"><img class="billboard__img" src="assets/hero.webp" width="1500" height="500" alt="" loading="lazy" data-parallax></div>
+
+  <section class="sec" id="why">
+    <div class="wrap">
+      <div class="sec__head rv"><div><div class="eyebrow">Why Mintr</div><h2>Built for people who check first</h2></div></div>
+      <div class="cards">
+        <article class="card rv" data-spot>
+          <div class="card__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></svg></div>
+          <h3>Numbers up front</h3><p>Price, daily move, volume and depth sit side by side for every row. Nothing is hidden behind a click.</p>
+        </article>
+        <article class="card rv" data-spot>
+          <div class="card__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Nothing guessed</h3><p>If a fact has not been confirmed, the page says it is pending instead of dressing it up. What you see is what is known.</p>
+        </article>
+        <article class="card rv" data-spot>
+          <div class="card__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <h3>Fast on Solana</h3><p>Cheap, quick settlement means a token can be found, judged and moved in minutes. The board keeps pace with it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <div class="sec__head rv"><div><div class="eyebrow">How it works</div><h2>Three moves, in order</h2></div></div>
+      <div class="steps">
+        <article class="step rv" data-spot><h3>Survey</h3><p>Scan the board and sort it three ways: by volume, by biggest movers, or by how deep the liquidity runs.</p></article>
+        <article class="step rv" data-spot><h3>Verify</h3><p>Copy a token address with one tap and check it against the explorer you trust before anything else.</p></article>
+        <article class="step rv" data-spot><h3>Decide</h3><p>Act on your own read. Mintr shows the ground; it never tells you where to swing.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="path">
+    <div class="wrap">
+      <div class="sec__head rv"><div><div class="eyebrow">Roadmap</div><h2>Four stages down the shaft</h2></div></div>
+      <div class="path">
+        <article class="step phase rv" data-spot><span class="phase__tag">Stage one</span><h3>Surface</h3><p>Site, social presence and the live board go public.</p></article>
+        <article class="step phase rv" data-spot><span class="phase__tag">Stage two</span><h3>Launch</h3><p>Contract address announced and pinned above the fold.</p></article>
+        <article class="step phase rv" data-spot><span class="phase__tag">Stage three</span><h3>Tunnel</h3><p>Open-source tooling and community-run data views.</p></article>
+        <article class="step phase rv" data-spot><span class="phase__tag">Stage four</span><h3>Depth</h3><p>Longer-term utility, shaped with holders in the open.</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div>
+      <a class="brand" href="#top"><img src="assets/mark-160.png" width="{{MARK_W}}" height="{{MARK_H}}" alt=""><span>Mintr</span></a>
+      <p>Mintr is a community token experiment. Nothing on this page is financial advice, and market figures are relayed from a third party.</p>
+    </div>
+    {{FOOT_CHIPS}}
+  </div>
+</footer>
+<div class="sr-only" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
